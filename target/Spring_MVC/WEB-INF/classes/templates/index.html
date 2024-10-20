@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/main :: htmlhead"/>
+
+<body>
+
+<nav th:replace="layouts/main :: navigation"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="mt-5">CRUD App</h1>
+            <p class="lead">Практическая задача</p>
+            <ul class="list-unstyled">
+                <li>Spring MVC</li>
+                <li>Hibernate</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <a th:href="@{/users}" class="btn btn-secondary">Get user list</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layouts/main :: footer"></div>
+</body>
+</html>

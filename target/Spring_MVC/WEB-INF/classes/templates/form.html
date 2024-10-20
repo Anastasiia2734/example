@@ -1,0 +1,24 @@
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter user name" required/>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="last_name">Last name</label>
+            <input type="text" class="form-control" id="last_name" th:field="*{lastName}" placeholder="Enter last name"/>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Enter email" required/>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+        </div>
+    </div>
+
+    <button class="btn btn-secondary" type="submit" th:text="${user.id} ? 'Save' : 'Create'"/>
+    <a class="btn btn-light border-dark" href="/users">Cancel</a>
+</form>

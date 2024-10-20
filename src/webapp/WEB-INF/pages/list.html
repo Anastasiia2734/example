@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/main :: htmlhead"/>
+
+<body>
+
+<div th:replace="layouts/main :: navigation"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="mt-5">CRUD App</h1>
+            <p class="lead">User list</p>
+        </div>
+    </div>
+</div>
+
+<div class="container pl-0">
+    <div class="row pb-3 pt-3 mb-2 pl-0 ml-0">
+        <div class="col-12 pl-0">
+            <a th:href="${(#mvc.url('UC#addUserForm')).build()}" class="btn btn-secondary">Create new user</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:if="${users.size() > 0}">
+    <div class="row p-3 mb-2 bg-dark text-white">
+        <div class="col">Name</div>
+        <div class="col">Last name</div>
+        <div class="col text-center">E-mail</div>
+        <div class="col text-center">Actions</div>
+    </div>
+
+    <div th:each="user,rowStat : ${users}" class="d-flex align-items-center row p-2 mb-2"
+         th:classappend="${rowStat.count % 2 != 0 ? 'bg-light text-dark' : 'bg-secondary text-white'}">
+        <div class="col font-weight-bold" th:text="${user.getName()}"></div>
+        <div class="col" th:text="${user.getLastName()}"></div>
+        <div class="col text-center" th:text="${user.getEmail()}"></div>
+        <div class="col text-center">
+            <a th:href="@{/users/{id}/edit(id=${user.getId()})}" class="btn btn-secondary">Edit</a>
+            <a th:href="@{/users/delete(id=${user.getId()})}" class="btn btn-secondary">Delete</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" th:if="${users.size() == 0}">
+    <div class="row p-3 mb-2 bg-light text-dark">
+        <div class="col-12">Users not found. Please insert.</div>
+    </div>
+</div>
+
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <div class="toast-body" th:text="${flashMessage}"></div>
+        <div/>
+</div>
